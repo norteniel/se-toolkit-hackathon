@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PlanDecider</title>
+</head>
+<body>
+
+    <h1>What should we deside?</h1>
+
+    <textarea id="input" rows="5" cols="40"
+    placeholder="For example: pizza, sushi, burger"></textarea><br><br>
+
+    <button onclick="choose()">Choose</button>
+
+    <h2 id="result"></h2>
+
+    <script>
+        async function choose() {
+            let text = document.getElementById("input").value;
+            let items = text.split(",").map(i => i.trim()).filter(i => i);
+
+            let res = await fetch("http://127.0.0.1:8000/choose", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({items})
+            });
+
+            let data = await res.json();
+            document.getElementById("result").innerText = data.result || data.error;
+        }
+    </script>
+
+</body>
+</html>
