@@ -19,7 +19,7 @@
             let text = document.getElementById("input").value;
             let items = text.split(",").map(i => i.trim()).filter(i => i);
 
-            let res = await fetch("http://127.0.0.1:8000/choose", {
+            let res = await fetch("https://se-toolkit-hackathon-zg8a.onrender.com/choose", {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({items})
