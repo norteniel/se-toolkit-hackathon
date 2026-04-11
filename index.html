@@ -1,43 +1,59 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>AI Chooser</title>
+    <title>PlanDecider</title>
     <style>
-        body {
-            font-family: Arial;
-            background: #0f172a;
-            color: white;
-            text-align: center;
-            padding: 50px;
-        }
+    body {
+        font-family: Arial;
+        background: linear-gradient(135deg, #1e293b, #0f172a);
+        color: white;
+        text-align: center;
+        padding: 50px;
+    }
 
-        input {
-            padding: 10px;
-            width: 300px;
-            border-radius: 8px;
-            border: none;
-        }
+    h1 {
+        font-size: 40px;
+        margin-bottom: 20px;
+    }
 
-        button {
-            padding: 10px 20px;
-            margin-left: 10px;
-            border-radius: 8px;
-            border: none;
-            background: #3b82f6;
-            color: white;
-            cursor: pointer;
-        }
+    input {
+        padding: 12px;
+        width: 300px;
+        border-radius: 10px;
+        border: none;
+        margin-right: 10px;
+    }
 
-        #result {
-            margin-top: 20px;
-            font-size: 20px;
-        }
+    button {
+        padding: 12px 20px;
+        border-radius: 10px;
+        border: none;
+        background: #3b82f6;
+        color: white;
+        cursor: pointer;
+        transition: 0.3s;
+    }
 
-        #history {
-            margin-top: 30px;
-            font-size: 14px;
-            color: #94a3b8;
-        }
+    button:hover {
+        background: #2563eb;
+    }
+
+    #result {
+        margin-top: 20px;
+        font-size: 22px;
+        font-weight: bold;
+    }
+
+    #explanation {
+        margin-top: 10px;
+        color: #cbd5f5;
+    }
+
+    #history {
+        margin-top: 30px;
+        font-size: 14px;
+        color: #94a3b8;
+    }
     </style>
 </head>
 <body>
@@ -72,8 +88,8 @@ async function choose() {
     document.getElementById("explanation").innerText = data.explanation || "";
 
     if (data.history) {
-        document.getElementById("history").innerText =
-            "History: " + JSON.stringify(data.history);
+    document.getElementById("history").innerText =
+        "History:\n" + data.history.map(h => "- " + h.join(", ")).join("\n");
     }
 }
 </script>
