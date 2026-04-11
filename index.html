@@ -17,16 +17,18 @@
 async function choose() {
     const value = document.getElementById("input").value;
 
+    const items = value.split(",").map(i => i.trim()).filter(i => i);
+
     const res = await fetch("https://se-toolkit-hackathon-zg8a.onrender.com/choose", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({ text: value })
+        body: JSON.stringify({ items })
     });
 
     const data = await res.json();
-    document.getElementById("result").innerText = data.result;
+    document.getElementById("result").innerText = data.result || data.error;
 }
 </script>
 
