@@ -36,8 +36,8 @@ def choose(options: Options):
             ]
         )
         text = explanation.choices[0].message.content
-    except:
-        text = "AI explanation unavailable"
+    except Exception as e:
+        text = f"Ошибка ИИ: {str(e)}"
 
     history.append(options.items)
 
