@@ -1,3 +1,6 @@
+</body>
+</html>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,30 +8,27 @@
 </head>
 <body>
 
-    <h1>What should we decide?</h1>
+<input id="input" placeholder="Введите запрос..." />
+<button onclick="choose()">Choose</button>
 
-    <textarea id="input" rows="5" cols="40"
-    placeholder="pizza, sushi, burger"></textarea><br><br>
+<p id="result"></p>
 
-    <button onclick="choose()">Choose</button>
+<script>
+async function choose() {
+    const value = document.getElementById("input").value;
 
-    <h2 id="result"></h2>
+    const res = await fetch("https://se-toolkit-hackathon-zg8a.onrender.com/choose", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ text: value })
+    });
 
-    <script>
-        async function choose() {
-            let text = document.getElementById("input").value;
-            let items = text.split(",").map(i => i.trim()).filter(i => i);
-
-            let res = await fetch("https://se-toolkit-hackathon-zg8a.onrender.com/choose", {
-                method: "POST",
-                headers: {"Content-Type": "application/json"},
-                body: JSON.stringify({items})
-            });
-
-            let data = await res.json();
-            document.getElementById("result").innerText = data.result || data.error;
-        }
-    </script>
+    const data = await res.json();
+    document.getElementById("result").innerText = data.result;
+}
+</script>
 
 </body>
 </html>
