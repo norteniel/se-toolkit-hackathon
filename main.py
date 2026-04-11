@@ -28,17 +28,18 @@ def choose(options: Options):
 
     choice = random.choice(options.items)
 
-    explanation = client.chat.completions.create(
-        model="gpt-4.1-mini",
-        messages=[
-            {"role": "user", "content": f"Why is '{choice}' a good choice among {options.items}?"}
-        ]
-    )
-
-    history.append(options.items)
+    try:
+        explanation = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[
+                {"role": "user", "content": f"Why is '{choice}' a good choice among {options.items}?"}
+            ]
+        )
+        text = explanation.choices[0].message.content
+    except Exception as e:
+        text = "AI explanation unavailable"
 
     return {
         "result": f"I choose: {choice}",
-        "explanation": explanation.choices[0].message.content,
-        "history": history
+        "explanation": text
     }
