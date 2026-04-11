@@ -32,7 +32,7 @@ def choose(options: Options):
         explanation = client.chat.completions.create(
             model="gpt-4o-mini",
             messages=[
-                {"role": "user", "content": f"Why is '{choice}' a good choice among {options.items}?"}
+                {"role": "user", "content": f"Пользователь выбирает между вариантами: {options.items}. Объясни, почему вариант '{choice}' является наилучшим выбором. Учитывай здравый смысл, практичность и возможный контекст, даже если он не указан явно. Ответ дай кратко и по делу."}
             ]
         )
         text = explanation.choices[0].message.content
